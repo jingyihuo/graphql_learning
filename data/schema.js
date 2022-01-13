@@ -7,6 +7,7 @@ const typeDefs = `
         firstName: String
         lastName: String
         gender: Gender
+        language: String
         age: Int
         email: String
         contacts: [Contact]
@@ -17,6 +18,13 @@ const typeDefs = `
         lastName: String
     }
 
+    type Alien {
+        id: ID
+        firstName: String
+        lastName: String
+        planet: String
+    }
+
     enum Gender {
         MALE
         FEMALE
@@ -25,6 +33,8 @@ const typeDefs = `
 
     type Query {
         getFriend(id: ID): Friend
+        getOneFriend(id: ID): Friend
+        getAliens: [Alien]
     }
 
     input FriendInput {
@@ -32,6 +42,7 @@ const typeDefs = `
         firstName: String
         lastName: String
         gender:Gender
+        language: String
         age: Int
         email: String
         contacts: [ContactInput]
@@ -44,9 +55,11 @@ const typeDefs = `
 
     type Mutation {
         createFriend(input: FriendInput):Friend
+        updateFriend(input: FriendInput):Friend
+        deleteFriend(id: ID!): String
     }
 `;
 
-const schema = makeExecutableSchema({typeDefs, resolvers});
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-export default { schema };
+export { schema };
